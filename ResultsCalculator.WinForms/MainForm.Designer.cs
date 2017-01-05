@@ -37,9 +37,15 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.lapsCount = new System.Windows.Forms.NumericUpDown();
-            this.button1 = new System.Windows.Forms.Button();
+            this.calculate = new System.Windows.Forms.Button();
             this.imageList1 = new System.Windows.Forms.ImageList(this.components);
             this.resultsBox = new System.Windows.Forms.TextBox();
+            this.listBox1 = new System.Windows.Forms.ListBox();
+            this.addRunner = new System.Windows.Forms.Button();
+            this.deleteRunner = new System.Windows.Forms.Button();
+            this.export = new System.Windows.Forms.Button();
+            this.raceStartTime = new System.Windows.Forms.DateTimePicker();
+            this.button1 = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.lapsCount)).BeginInit();
             this.SuspendLayout();
             // 
@@ -58,7 +64,7 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.runnerName.Location = new System.Drawing.Point(91, 12);
             this.runnerName.Name = "runnerName";
-            this.runnerName.Size = new System.Drawing.Size(181, 20);
+            this.runnerName.Size = new System.Drawing.Size(521, 20);
             this.runnerName.TabIndex = 1;
             // 
             // label2
@@ -74,21 +80,25 @@
             // 
             this.startTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.startTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.startTime.CustomFormat = "h:mm tt";
+            this.startTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.startTime.Location = new System.Drawing.Point(91, 38);
             this.startTime.Name = "startTime";
-            this.startTime.Size = new System.Drawing.Size(181, 20);
+            this.startTime.Size = new System.Drawing.Size(521, 20);
             this.startTime.TabIndex = 3;
+            this.startTime.Value = new System.DateTime(2017, 1, 1, 8, 0, 0, 0);
             // 
             // finishTime
             // 
             this.finishTime.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
-            this.finishTime.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.finishTime.CustomFormat = "h:mm tt";
+            this.finishTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.finishTime.Location = new System.Drawing.Point(91, 64);
             this.finishTime.Name = "finishTime";
-            this.finishTime.Size = new System.Drawing.Size(181, 20);
+            this.finishTime.Size = new System.Drawing.Size(521, 20);
             this.finishTime.TabIndex = 4;
+            this.finishTime.Value = new System.DateTime(2017, 1, 1, 8, 0, 0, 0);
             // 
             // label3
             // 
@@ -114,18 +124,23 @@
             | System.Windows.Forms.AnchorStyles.Right)));
             this.lapsCount.Location = new System.Drawing.Point(91, 90);
             this.lapsCount.Name = "lapsCount";
-            this.lapsCount.Size = new System.Drawing.Size(181, 20);
+            this.lapsCount.Size = new System.Drawing.Size(521, 20);
             this.lapsCount.TabIndex = 7;
+            this.lapsCount.Value = new decimal(new int[] {
+            1,
+            0,
+            0,
+            0});
             // 
-            // button1
+            // calculate
             // 
-            this.button1.Location = new System.Drawing.Point(12, 116);
-            this.button1.Name = "button1";
-            this.button1.Size = new System.Drawing.Size(75, 23);
-            this.button1.TabIndex = 8;
-            this.button1.Text = "Calculate";
-            this.button1.UseVisualStyleBackColor = true;
-            this.button1.Click += new System.EventHandler(this.button1_Click);
+            this.calculate.Location = new System.Drawing.Point(12, 116);
+            this.calculate.Name = "calculate";
+            this.calculate.Size = new System.Drawing.Size(75, 23);
+            this.calculate.TabIndex = 8;
+            this.calculate.Text = "Calculate";
+            this.calculate.UseVisualStyleBackColor = true;
+            this.calculate.Click += new System.EventHandler(this.calculate_Click);
             // 
             // imageList1
             // 
@@ -135,23 +150,93 @@
             // 
             // resultsBox
             // 
-            this.resultsBox.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
-            | System.Windows.Forms.AnchorStyles.Left) 
+            this.resultsBox.Anchor = ((System.Windows.Forms.AnchorStyles)(((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.resultsBox.Location = new System.Drawing.Point(12, 145);
             this.resultsBox.Multiline = true;
             this.resultsBox.Name = "resultsBox";
             this.resultsBox.ReadOnly = true;
-            this.resultsBox.Size = new System.Drawing.Size(260, 104);
+            this.resultsBox.Size = new System.Drawing.Size(600, 52);
             this.resultsBox.TabIndex = 9;
+            // 
+            // listBox1
+            // 
+            this.listBox1.Anchor = ((System.Windows.Forms.AnchorStyles)((((System.Windows.Forms.AnchorStyles.Top | System.Windows.Forms.AnchorStyles.Bottom) 
+            | System.Windows.Forms.AnchorStyles.Left) 
+            | System.Windows.Forms.AnchorStyles.Right)));
+            this.listBox1.FormattingEnabled = true;
+            this.listBox1.Location = new System.Drawing.Point(12, 203);
+            this.listBox1.Name = "listBox1";
+            this.listBox1.Size = new System.Drawing.Size(600, 199);
+            this.listBox1.TabIndex = 10;
+            // 
+            // addRunner
+            // 
+            this.addRunner.Location = new System.Drawing.Point(90, 116);
+            this.addRunner.Name = "addRunner";
+            this.addRunner.Size = new System.Drawing.Size(75, 23);
+            this.addRunner.TabIndex = 11;
+            this.addRunner.Text = "Add Runner";
+            this.addRunner.UseVisualStyleBackColor = true;
+            this.addRunner.Click += new System.EventHandler(this.addRunner_Click);
+            // 
+            // deleteRunner
+            // 
+            this.deleteRunner.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.deleteRunner.Enabled = false;
+            this.deleteRunner.Location = new System.Drawing.Point(12, 408);
+            this.deleteRunner.Name = "deleteRunner";
+            this.deleteRunner.Size = new System.Drawing.Size(75, 23);
+            this.deleteRunner.TabIndex = 12;
+            this.deleteRunner.Text = "Delete";
+            this.deleteRunner.UseVisualStyleBackColor = true;
+            this.deleteRunner.Click += new System.EventHandler(this.deleteRunner_Click);
+            // 
+            // export
+            // 
+            this.export.Anchor = ((System.Windows.Forms.AnchorStyles)((System.Windows.Forms.AnchorStyles.Bottom | System.Windows.Forms.AnchorStyles.Left)));
+            this.export.Location = new System.Drawing.Point(93, 408);
+            this.export.Name = "export";
+            this.export.Size = new System.Drawing.Size(75, 23);
+            this.export.TabIndex = 13;
+            this.export.Text = "Export CSV";
+            this.export.UseVisualStyleBackColor = true;
+            this.export.Click += new System.EventHandler(this.export_Click);
+            // 
+            // raceStartTime
+            // 
+            this.raceStartTime.CustomFormat = "h:mm tt";
+            this.raceStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
+            this.raceStartTime.Location = new System.Drawing.Point(279, 118);
+            this.raceStartTime.Name = "raceStartTime";
+            this.raceStartTime.Size = new System.Drawing.Size(85, 20);
+            this.raceStartTime.TabIndex = 14;
+            this.raceStartTime.Value = new System.DateTime(2017, 1, 1, 8, 0, 0, 0);
+            // 
+            // button1
+            // 
+            this.button1.Location = new System.Drawing.Point(181, 116);
+            this.button1.Name = "button1";
+            this.button1.Size = new System.Drawing.Size(92, 23);
+            this.button1.TabIndex = 15;
+            this.button1.Text = "Race Start Time";
+            this.button1.UseVisualStyleBackColor = true;
+            this.button1.Click += new System.EventHandler(this.button1_Click);
             // 
             // MainForm
             // 
+            this.AcceptButton = this.addRunner;
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(284, 261);
-            this.Controls.Add(this.resultsBox);
+            this.ClientSize = new System.Drawing.Size(624, 441);
             this.Controls.Add(this.button1);
+            this.Controls.Add(this.raceStartTime);
+            this.Controls.Add(this.export);
+            this.Controls.Add(this.deleteRunner);
+            this.Controls.Add(this.addRunner);
+            this.Controls.Add(this.listBox1);
+            this.Controls.Add(this.resultsBox);
+            this.Controls.Add(this.calculate);
             this.Controls.Add(this.lapsCount);
             this.Controls.Add(this.label4);
             this.Controls.Add(this.label3);
@@ -160,6 +245,7 @@
             this.Controls.Add(this.label2);
             this.Controls.Add(this.runnerName);
             this.Controls.Add(this.label1);
+            this.MinimumSize = new System.Drawing.Size(300, 300);
             this.Name = "MainForm";
             this.Text = "Results Calculator";
             ((System.ComponentModel.ISupportInitialize)(this.lapsCount)).EndInit();
@@ -178,9 +264,15 @@
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.NumericUpDown lapsCount;
-        private System.Windows.Forms.Button button1;
+        private System.Windows.Forms.Button calculate;
         private System.Windows.Forms.ImageList imageList1;
         private System.Windows.Forms.TextBox resultsBox;
+        private System.Windows.Forms.ListBox listBox1;
+        private System.Windows.Forms.Button addRunner;
+        private System.Windows.Forms.Button deleteRunner;
+        private System.Windows.Forms.Button export;
+        private System.Windows.Forms.DateTimePicker raceStartTime;
+        private System.Windows.Forms.Button button1;
     }
 }
 

@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace ResultsCalculator.WinForms
 {
-    public class Runner
+    public class Runner : IComparable<Runner>
     {
         public string Name;
         public DateTime StartTime;
@@ -38,6 +38,19 @@ namespace ResultsCalculator.WinForms
         public void AddLap(Lap LapToAdd)
         {
             Laps.Add(LapToAdd);
+        }
+
+        public int CompareTo(Runner runnerToCompare)
+        {
+            if (this.totalLaps > runnerToCompare.totalLaps)
+                return -1;
+            else if (this.totalLaps < runnerToCompare.totalLaps)
+                return 1;
+            else if (this.TotalTime > runnerToCompare.TotalTime)
+                return 1;
+            else if (this.TotalTime < runnerToCompare.TotalTime)
+                return -1;
+            else return 0;
         }
     }
 }

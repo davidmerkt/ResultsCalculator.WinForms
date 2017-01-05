@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Collections.Generic;
 using Microsoft.VisualStudio.TestTools.UnitTesting;
 using ResultsCalculator.WinForms;
 
@@ -161,7 +162,69 @@ namespace ResultsCalculator.UnitTests
             //Act
             actualTimeSpan = newRunner.GetLap(4).SplitTime;
 
+            //Assert
             Assert.AreEqual(expectedTimeSpan, actualTimeSpan);
+        }
+
+        [TestMethod]
+        public void Runner_CompareTo_SortByLaps()
+        {
+            //Arrange
+            List<Runner> newRunnerList = new List<Runner>();
+            newRunnerList.Add(new Runner { Name = "Runner2", TotalLaps = 2, StartTime = Convert.ToDateTime("1/1/2017 8:00AM"), EndTime = Convert.ToDateTime("1/1/2017 9:00AM") });
+            newRunnerList.Add(new Runner { Name = "Runner1", TotalLaps = 1, StartTime = Convert.ToDateTime("1/1/2017 8:00AM"), EndTime = Convert.ToDateTime("1/1/2017 8:30AM") });
+            newRunnerList.Add(new Runner { Name = "Runner5", TotalLaps = 5, StartTime = Convert.ToDateTime("1/1/2017 8:00AM"), EndTime = Convert.ToDateTime("1/1/2017 10:30AM") });
+            newRunnerList.Add(new Runner { Name = "Runner8", TotalLaps = 8, StartTime = Convert.ToDateTime("1/1/2017 8:00AM"), EndTime = Convert.ToDateTime("1/1/2017 12:00AM") });
+            newRunnerList.Add(new Runner { Name = "Runner3", TotalLaps = 3, StartTime = Convert.ToDateTime("1/1/2017 8:00AM"), EndTime = Convert.ToDateTime("1/1/2017 9:30AM") });
+
+
+            //Act
+            newRunnerList.Sort();
+
+            //Assert
+            Assert.AreEqual("Runner8", newRunnerList[0].Name);
+            Assert.AreEqual(8, newRunnerList[0].TotalLaps);
+            Assert.AreEqual("Runner3", newRunnerList[2].Name);
+            Assert.AreEqual(3, newRunnerList[2].TotalLaps);
+            Assert.AreEqual("Runner1", newRunnerList[4].Name);
+            Assert.AreEqual(1, newRunnerList[4].TotalLaps);
+        }
+
+        [TestMethod]
+        public void Runner_CompareTo_SortByLapsAndTime()
+        {
+            //Arrange
+            List<Runner> newRunnerList = new List<Runner>();
+            newRunnerList.Add(new Runner { Name = "Runner5b", TotalLaps = 5, StartTime = Convert.ToDateTime("1/1/2017 8:00AM"), EndTime = Convert.ToDateTime("1/1/2017 10:30AM") });
+            newRunnerList.Add(new Runner { Name = "Runner5a", TotalLaps = 5, StartTime = Convert.ToDateTime("1/1/2017 8:00AM"), EndTime = Convert.ToDateTime("1/1/2017 9:40AM") });
+            newRunnerList.Add(new Runner { Name = "Runner2a", TotalLaps = 2, StartTime = Convert.ToDateTime("1/1/2017 8:00AM"), EndTime = Convert.ToDateTime("1/1/2017 8:40AM") });
+            newRunnerList.Add(new Runner { Name = "Runner1", TotalLaps = 1, StartTime = Convert.ToDateTime("1/1/2017 8:00AM"), EndTime = Convert.ToDateTime("1/1/2017 8:30AM") });
+            newRunnerList.Add(new Runner { Name = "Runner2b", TotalLaps = 2, StartTime = Convert.ToDateTime("1/1/2017 8:00AM"), EndTime = Convert.ToDateTime("1/1/2017 9:00AM") });
+
+
+            //Act
+            newRunnerList.Sort();
+
+            //Assert
+            Assert.AreEqual("Runner5a", newRunnerList[0].Name);
+            Assert.AreEqual(5, newRunnerList[0].TotalLaps);
+            Assert.AreEqual(new TimeSpan(1, 40, 0), newRunnerList[0].TotalTime);
+
+            Assert.AreEqual("Runner5b", newRunnerList[1].Name);
+            Assert.AreEqual(5, newRunnerList[1].TotalLaps);
+            Assert.AreEqual(new TimeSpan(2, 30, 0), newRunnerList[1].TotalTime);
+
+            Assert.AreEqual("Runner2a", newRunnerList[2].Name);
+            Assert.AreEqual(2, newRunnerList[2].TotalLaps);
+            Assert.AreEqual(new TimeSpan(0, 40, 0), newRunnerList[2].TotalTime);
+
+            Assert.AreEqual("Runner2b", newRunnerList[3].Name);
+            Assert.AreEqual(2, newRunnerList[3].TotalLaps);
+            Assert.AreEqual(new TimeSpan(1, 00, 0), newRunnerList[3].TotalTime);
+
+            Assert.AreEqual("Runner1", newRunnerList[4].Name);
+            Assert.AreEqual(1, newRunnerList[4].TotalLaps);
+            Assert.AreEqual(new TimeSpan(0, 30, 0), newRunnerList[4].TotalTime);
         }
     }
 }
