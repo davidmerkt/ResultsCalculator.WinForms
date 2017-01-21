@@ -44,27 +44,39 @@ namespace ResultsCalculator.WinForms
                 listBox1.Items.Add(runnerList[i].Name.ToString() + "\t" + runnerList[i].TotalLaps.ToString() + "\t" + runnerList[i].TotalTime.ToString());
             //listBox1.Items.Add(runnerList[runnerList.Count - 1].Name.ToString() + "\t" + runnerList[runnerList.Count - 1].TotalLaps.ToString() + "\t" + runnerList[runnerList.Count - 1].TotalTime.ToString());
 
+            deleteRunner.Enabled = true;
         }
 
         private void deleteRunner_Click(object sender, EventArgs e)
         {
+            int selectedRow;
 
+            selectedRow = listBox1.SelectedIndex;
+            listBox1.Items.RemoveAt(selectedRow);
+            runnerList.RemoveAt(selectedRow - 1);
         }
 
         private void export_Click(object sender, EventArgs e)
         {
             string path = Environment.GetFolderPath(Environment.SpecialFolder.MyDocuments) + @"\runnerlist.csv";
-
-            StreamWriter sw = new StreamWriter(path);
-
-            sw.WriteLine("Name,Laps,Time");
-
-            for (int i = 0; i < runnerList.Count - 1; i++)
+            try
             {
-                sw.WriteLine(runnerList[i].Name + "," + runnerList[i].TotalLaps + "," + runnerList[i].TotalTime.ToString());
-            }
+                StreamWriter sw = new StreamWriter(path);
 
-            sw.Close();
+                sw.WriteLine("Name,Laps,Time");
+
+                for (int i = 0; i < runnerList.Count; i++)
+                {
+                    sw.WriteLine(runnerList[i].Name + "," + runnerList[i].TotalLaps + "," + runnerList[i].TotalTime.ToString());
+                }
+
+                sw.Close();
+                MessageBox.Show("CSV Results exported to:\n" + path, "Export Successful", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            }
+            catch (Exception)
+            {
+                MessageBox.Show("Export failed to:\n" + path, "Export Failed", MessageBoxButtons.OK, MessageBoxIcon.Error);
+            }
         }
 
         private void button1_Click(object sender, EventArgs e)

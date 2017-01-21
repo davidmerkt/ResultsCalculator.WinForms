@@ -156,7 +156,7 @@
             this.resultsBox.Multiline = true;
             this.resultsBox.Name = "resultsBox";
             this.resultsBox.ReadOnly = true;
-            this.resultsBox.Size = new System.Drawing.Size(600, 52);
+            this.resultsBox.Size = new System.Drawing.Size(600, 45);
             this.resultsBox.TabIndex = 9;
             // 
             // listBox1
@@ -165,9 +165,9 @@
             | System.Windows.Forms.AnchorStyles.Left) 
             | System.Windows.Forms.AnchorStyles.Right)));
             this.listBox1.FormattingEnabled = true;
-            this.listBox1.Location = new System.Drawing.Point(12, 203);
+            this.listBox1.Location = new System.Drawing.Point(12, 196);
             this.listBox1.Name = "listBox1";
-            this.listBox1.Size = new System.Drawing.Size(600, 199);
+            this.listBox1.Size = new System.Drawing.Size(600, 212);
             this.listBox1.TabIndex = 10;
             // 
             // addRunner
@@ -207,7 +207,7 @@
             // 
             this.raceStartTime.CustomFormat = "h:mm tt";
             this.raceStartTime.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
-            this.raceStartTime.Location = new System.Drawing.Point(279, 118);
+            this.raceStartTime.Location = new System.Drawing.Point(287, 118);
             this.raceStartTime.Name = "raceStartTime";
             this.raceStartTime.Size = new System.Drawing.Size(85, 20);
             this.raceStartTime.TabIndex = 14;
@@ -215,7 +215,7 @@
             // 
             // button1
             // 
-            this.button1.Location = new System.Drawing.Point(181, 116);
+            this.button1.Location = new System.Drawing.Point(190, 116);
             this.button1.Name = "button1";
             this.button1.Size = new System.Drawing.Size(92, 23);
             this.button1.TabIndex = 15;
